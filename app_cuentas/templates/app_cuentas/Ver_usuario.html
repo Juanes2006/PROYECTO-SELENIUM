@@ -1,0 +1,55 @@
+{% extends 'app_cuentas/base.html' %}
+
+{% block title %}Detalle Usuario{% endblock %}
+
+{% block content %}
+
+<h1>Detalle del Usuario</h1>
+
+<div style="margin-top:20px; max-width:600px;">
+
+    <table cellpadding="8">
+        <tr>
+            <th align="left">Usuario:</th>
+            <td>{{ usuario.username }}</td>
+        </tr>
+
+        <tr>
+            <th align="left">Email:</th>
+            <td>{{ usuario.email|default:"Sin email" }}</td>
+        </tr>
+
+        <tr>
+            <th align="left">Estado:</th>
+            <td>
+                {% if usuario.is_active %}
+                    <span style="color:green;">Activo</span>
+                {% else %}
+                    <span style="color:red;">Inactivo</span>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <th align="left">Es staff:</th>
+            <td>{{ usuario.is_staff|yesno:"Sí,No" }}</td>
+        </tr>
+
+        <tr>
+            <th align="left">Fecha registro:</th>
+            <td>{{ usuario.date_joined }}</td>
+        </tr>
+
+        <tr>
+            <th align="left">Último login:</th>
+            <td>
+                {{ usuario.last_login|default:"Nunca" }}
+            </td>
+        </tr>
+    </table>
+
+ 
+
+</div>
+
+{% endblock %}

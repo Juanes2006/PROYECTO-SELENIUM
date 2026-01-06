@@ -1,0 +1,90 @@
+{% extends 'app_cuentas/base.html' %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<style>
+    .nav {
+        height: 60px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #e5e7eb;
+    }
+</style>
+
+<div class="nav">
+<h1>Usuarios</h1>
+<a href="{% url 'agregar_usuario' %}">Agregar usuarios</a>
+</div><br><br>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #e5e7eb;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for u in usuarios %}
+        <tr>
+            <td>{{ u.username }}</td>
+
+            <td>
+                {% if u.is_active %}
+                    <span style="color: green;">Activo</span>
+                {% else %}
+                    <span style="color: red;">Inactivo</span>
+                {% endif %}
+            </td>
+
+            <td>
+                <a href="{% url 'ver_usuario' u.id %}">Ver</a>
+
+                |
+                
+                <form method="post"
+                      action="{% url 'cambiar_estado_usuario' u.id %}"
+                      style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">
+                        {% if u.is_active %}
+                            Desactivar
+                        {% else %}
+                            Activar
+                        {% endif %}
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
