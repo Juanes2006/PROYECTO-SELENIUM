@@ -18,6 +18,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+import time
 
 ###################### Iniciacion del programa e inicio de sesion ############################
 
@@ -80,12 +81,11 @@ email.send_keys("jj@gmail.com")
 password.send_keys("Manila2026")
 password.send_keys(Keys.ENTER)
 
-WebDriverWait(driver, 50).until(
-    EC.url_contains("/usuarios")
-)
+# Mantener el navegador abierto por 10 segundos
+time.sleep(200)
 
-
-
+# Cerrar el navegador
+driver.quit()
 
 
 print("Proceso Exitoso")
