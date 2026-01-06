@@ -17,7 +17,7 @@
 
 <div class="nav">
 <h1>Usuarios</h1>
-<a href="{% url 'agregar_usuario' %}">Agregar usuarios</a>
+<a class="agregar_usu" href="{% url 'agregar_usuario' %}">Agregar usuarios</a>
 </div><br><br>
 
 <style>
@@ -40,7 +40,65 @@
     tr:hover {
         background-color: #f1f1f1;
     }
+
+    .btn_habilitar button {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+
+
+    }
+
+    .btn_eliminar button {
+        background-color: #f44336;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+
+
+    }
+
+    .ver_btn {
+        background-color: #2563eb;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .inp_buscar {
+        padding: 8px;
+        width: 200px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .btn_buscar {
+        padding: 8px 16px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+.agregar_usu {
+        background-color: #10b981;
+        color: white;
+        border-radius: 30px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
 </style>
+
+<!-- Secccion de buscar -->
+<form  method="get" action="{% url 'buscar_usuario' %}">
+    <input class="inp_buscar" type="text" name="buscador_Users" placeholder="Buscar usuario..." value="{{ request.GET.buscador_Users }}">
+    <button class="btn_buscar" type="submit">Buscar</button>
+</form>
 
 <table border="1" cellpadding="8">
     <thead>
@@ -65,11 +123,9 @@
             </td>
 
             <td>
-                <a href="{% url 'ver_usuario' u.id %}">Ver</a>
+                <a class="ver_btn" href="{% url 'ver_usuario' u.id %}">Ver</a>
 
-                |
-                
-                <form method="post"
+                <form class="btn_habilitar" method="post"
                       action="{% url 'cambiar_estado_usuario' u.id %}"
                       style="display:inline;">
                     {% csrf_token %}
@@ -80,6 +136,15 @@
                             Activar
                         {% endif %}
                     </button>
+                </form>
+
+
+                <form class="btn_eliminar" method="get" action="{% url 'eliminar_usuario' u.id %}"
+                style="display:inline;"
+                >
+                {% csrf_token %}
+                    <button type="submit">Eliminar</button>
+                    
                 </form>
             </td>
         </tr>

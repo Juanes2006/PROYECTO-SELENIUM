@@ -1,6 +1,15 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
+########################### Manejo de Errores Handler         #############################
+
+# core/views.py
+from django.shortcuts import redirect
+
+def redirect_404(request, exception):
+    return redirect("login")  # o home / dashboard
+
+
 ########################## Login  ###################################
 def login_view(request):
     if request.method == 'POST':
@@ -54,15 +63,25 @@ def usuarios_view(request):
 
 @login_required(login_url='login')
 def agregar_usuario_view(request):
-    if request.method == 'POST':
-        username = request.POST['username'] 
-        email = request.POST['email']
-        password = request.POST['password']
+        
 
-        User.objects.create_user(username=username, email=email, password=password)
+        if request.method == 'POST':
+            username = request.POST['username'] 
+            email = request.POST['email']
+            password = request.POST['password']
 
-        return redirect('usuarios')
-    return render(request, 'app_cuentas/Agregar_usuario.html')
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'El nombre de usuario ya existe.')
+                return render(request, 'app_cuentas/Agregar_usuario.html')
+
+
+            User.objects.create_user(username=username, email=email, password=password)
+            messages.info(request, 'Usuario agregado exitosamente.')
+
+
+
+            return redirect('usuarios')
+        return render(request, 'app_cuentas/Agregar_usuario.html')
 
 ####################### Cambiar estado ###############################
 
@@ -88,3 +107,30 @@ def ver_usuario_view(request, user_id):
         'usuario': usuario
     })
 
+
+from django.contrib import messages
+
+
+login_required(login_url='login')
+def buscar_usuario_view(request):
+    query = request.GET.get('buscador_Users', '')
+    usuarios = User.objects.filter(username__icontains=query)
+    if not usuarios.exists():
+        messages.warning(request, 'No se encontraron usuarios que coincidan con la búsqueda.')
+
+    else:
+        messages.success(request, f'Se encontraron {usuarios.count()} usuarios que coinciden con la búsqueda.')
+    
+
+    return render(request, 'app_cuentas/Usuarios.html', {
+        'usuarios': usuarios,
+        'query': query
+    })
+
+
+login_required(login_url='login')
+def eliminar_usuario(request, user_id):
+    usuario = User.objects.get(id=user_id)
+    usuario.delete()
+    messages.info(request, 'Usuario eliminado correctamente. ')
+    return redirect('usuarios')

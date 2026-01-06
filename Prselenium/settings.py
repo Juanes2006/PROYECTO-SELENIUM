@@ -24,6 +24,8 @@ SECRET_KEY = 'django-insecure-gjb5wppe0m%ii-d3&*xonghs4w&dgvcw3aoqa6md&_p$g$39_n
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+LOGIN_REDIRECT_URL = 'iniciarSesion/'
+
 
 ALLOWED_HOSTS = []
 
@@ -79,6 +81,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# configuracion archivos estaticos
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 
 # Password validation
