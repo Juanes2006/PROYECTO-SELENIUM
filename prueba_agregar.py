@@ -11,12 +11,13 @@ import time
 driver = webdriver.Chrome()
 driver.get("http://localhost:8000/iniciarSesion")
 
-username = driver.find_element(By.NAME, "username")
-password = driver.find_element(By.NAME, "password")
+login_username = driver.find_element(By.NAME, "username")
+login_password = driver.find_element(By.NAME, "password")
 
-username.send_keys("je2006")
-password.send_keys("Manila2026")
-password.send_keys(Keys.ENTER)
+
+login_username.send_keys("je2006")
+login_password.send_keys("Manila2026")
+login_password.send_keys(Keys.ENTER)
 
 
 
@@ -34,9 +35,13 @@ for fila in range(2, sheet.max_row + 1):
     password = sheet.cell(row=fila, column=3).value
 
     if not username or not email or not password:
-        break
+        continue
 
     print(f"🔍 Agregando: {username}")
+
+    
+    driver.get("http://localhost:8000/agregar_usuario")
+
 
     # ---------- 4. BUSCAR ----------
     
@@ -44,6 +49,8 @@ for fila in range(2, sheet.max_row + 1):
     input_username = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.NAME, "username"))
 )
+
+
     input_email = driver.find_element(By.NAME, "email")
     input_password = driver.find_element(By.NAME, "password")
 
@@ -62,4 +69,4 @@ for fila in range(2, sheet.max_row + 1):
     time.sleep(2) 
     
 
-print("✅ Prueba de búsqueda terminada")
+print("✅ Prueba de Agregar Usuarios terminada")

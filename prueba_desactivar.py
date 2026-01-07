@@ -46,38 +46,41 @@ for fila in range(2, sheet.max_row + 1):
     busqueda.send_keys(valor_busqueda)
     busqueda.send_keys(Keys.ENTER)
 
-
+# 1️⃣ Buscar fila y botón
     fila = driver.find_element(
     By.XPATH,
-    "//tr[td[contains(text(), valor_busqueda)]]".format(valor_busqueda=valor_busqueda)
-)
-
+    f"//tr[td[contains(text(), '{valor_busqueda}')]]"
+    )
     boton = fila.find_element(By.TAG_NAME, "button")
+
+    estado_antes = boton.text
     boton.click()
 
+# 2️⃣ Esperar que el DOM se actualice
+    WebDriverWait(driver, 10).until(
+        EC.staleness_of(boton)
+    )
 
+# 3️⃣ VOLVER A BUSCAR la fila
     fila = driver.find_element(
-    By.XPATH,
-    "//tr[td[contains(text(), valor_busqueda)]]".format(valor_busqueda=valor_busqueda)
-)
-
+        By.XPATH,
+        f"//tr[td[contains(text(), '{valor_busqueda}')]]"
+    )
     boton = fila.find_element(By.TAG_NAME, "button")
-    estado = boton.text
-    
-    if estado == "Desactivar":
-        boton.click()
-        print("➡️ Usuario desactivado")
 
-    elif estado == "Activar":
-        print("ℹ️ Usuario ya está desactivado")
-    
-    print("Estado actual:", estado)
+    estado_despues = boton.text
+    print("Estado actual:", estado_despues)
+
 
     # ---------- 5. ESPERAR RESULTADO ----------
     WebDriverWait(driver, 10).until(
-    EC.url_contains("buscador_Users=valor_busqueda".format(valor_busqueda=valor_busqueda))
-) 
-    time.sleep(8)  # Esperar a que los resultados se carguen
+        EC.text_to_be_present_in_element(
+            (By.XPATH, "//tr[td[contains(text(), '{valor}')]]//button".format(valor=valor_busqueda)),
+        "Activar"
+        )
+    )
+
+    time.sleep(2)  # Esperar a que los resultados se carguen
     
 
 print("✅ Prueba de búsqueda terminada")

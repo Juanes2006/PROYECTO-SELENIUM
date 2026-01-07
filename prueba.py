@@ -76,7 +76,7 @@ username = driver.find_element(By.NAME, "username")
 email = driver.find_element(By.NAME, "email")
 password = driver.find_element(By.NAME, "password")
 
-username.send_keys("JUU")
+username.send_keys("JU U")
 email.send_keys("jj@gmail.com")
 password.send_keys("Manila2026")
 password.send_keys(Keys.ENTER)

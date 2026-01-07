@@ -58,11 +58,13 @@ for row in range(2, sheet.max_row + 1):
         continue
 
     fila_usuario = filas[0]
-    boton = fila_usuario.find_element(By.TAG_NAME, "button")
-    accion = boton.text.strip()
-    print(f"➡️ Acción disponible: {accion}")
-    boton.click()
+    boton_eliminar = fila_usuario.find_element(
+    By.XPATH, ".//button[contains(text(), 'Eliminar')]"
+)
+    boton_eliminar.click()
 
+    print(f"➡️ Acción disponible: {boton_eliminar}")
+    
     time.sleep(2)
 
 
