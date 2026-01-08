@@ -1,0 +1,52 @@
+=== REPORTE ELIMINACION DE USUARIOS ===
+
+✅ Usuario 1056123119 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123120 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123121 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123122 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123123 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123124 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123125 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123126 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123127 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123128 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123129 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+✅ Usuario 1056123130 ELIMINADO exitosamente.
+Mensaje de confirmación:
+Usuario eliminado correctamente.
+------------------------------------------------
+
+=== FIN REPORTE ELIMINACION DE USUARIOS ===

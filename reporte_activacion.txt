@@ -1,0 +1,52 @@
+=== REPORTE DE ACTIVACION DE USUARIOS === 
+
+✅ Usuario 1056123119 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123120 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123121 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123122 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123123 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123124 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123125 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123126 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123127 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123128 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123129 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123130 activado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+
+=== FIN DEL REPORTE ===

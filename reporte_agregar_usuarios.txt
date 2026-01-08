@@ -1,0 +1,51 @@
+=== REPORTE AUTOMATIZACIÓN SELENIUM ===
+
+❌ Error al agregar usuario 1056123119.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123120.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123121.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123122.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123123.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123124.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123125.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123126.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123127.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123128.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+❌ Error al agregar usuario 1056123129.
+Mensaje de error:
+El nombre de usuario ya existe.
+------------------------------------------------
+✅ Usuario 1056123130 agregado exitosamente.
+Mensaje de confirmación:
+Usuario agregado exitosamente.
+------------------------------------------------
+=== FIN DEL REPORTE ===

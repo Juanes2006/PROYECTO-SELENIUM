@@ -1,0 +1,52 @@
+=== REPORTE BUSQUEDA DE USUARIOS ===
+
+✅ Usuario 1056123119 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123120 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123121 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123122 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123123 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123124 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123125 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123126 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123127 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123128 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123129 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+✅ Usuario 1056123130 encontrado exitosamente.
+Mensaje de confirmación:
+Se encontraron 1 usuarios que coinciden con la búsqueda.
+------------------------------------------------
+
+=== FIN REPORTE BUSQUEDA DE USUARIOS ===

@@ -1,0 +1,52 @@
+=== REPORTE DE DESACTIVACION DE USUARIOS === 
+
+✅ Usuario 1056123119 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123120 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123121 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123122 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123123 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123124 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123125 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123126 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123127 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123128 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123129 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+✅ Usuario 1056123130 desactivado exitosamente.
+Mensaje de confirmación:
+Estado del usuario cambiado correctamente.
+------------------------------------------------
+
+=== FIN DEL REPORTE ===

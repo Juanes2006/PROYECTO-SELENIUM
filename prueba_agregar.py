@@ -7,6 +7,16 @@ from selenium.webdriver.support import expected_conditions as EC
 from openpyxl import load_workbook
 import time
 
+
+
+# ---------- INICIO REPORTE .txt ----------
+
+reporte = open("reporte_agregar_usuarios.txt", "w", encoding="utf-8")
+reporte.write("=== REPORTE AUTOMATIZACIÓN SELENIUM ===\n\n")
+
+
+
+
 # ---------- 1. ABRIR NAVEGADOR ----------
 driver = webdriver.Chrome()
 driver.get("http://localhost:8000/iniciarSesion")
@@ -20,14 +30,14 @@ login_password.send_keys("Manila2026")
 login_password.send_keys(Keys.ENTER)
 
 
-
+# -----------------2. Abrir URL correcta -------------------------
 driver.get("http://localhost:8000/agregar_usuario")
 
-# ---------- 2. CARGAR EXCEL ----------
+# ---------- 3. CARGAR EXCEL ----------
 workbook = load_workbook("usuarios.xlsx")
 sheet = workbook.active
 
-# ---------- 3. RECORRER EXCEL ----------
+# ---------- 4. RECORRER EXCEL ----------
 for fila in range(2, sheet.max_row + 1):
 
     username = sheet.cell(row=fila, column=1).value
@@ -43,7 +53,7 @@ for fila in range(2, sheet.max_row + 1):
     driver.get("http://localhost:8000/agregar_usuario")
 
 
-    # ---------- 4. BUSCAR ----------
+    # ---------- 5. BUSCAR ----------
     
 
     input_username = WebDriverWait(driver, 10).until(
@@ -64,9 +74,43 @@ for fila in range(2, sheet.max_row + 1):
     input_password.send_keys(password)
 
 
-    input_password.send_keys(Keys.ENTER)
-    
-    time.sleep(2) 
-    
+    try:
+        input_password.send_keys(Keys.ENTER)
 
+
+        mensaje = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "alert"))
+        )
+
+        texto_mensaje = mensaje.text
+        print("📢 Mensaje:", texto_mensaje)
+
+
+
+        if "Usuario agregado exitosamente" in driver.page_source:
+            print(f"✅ Usuario {username} agregado exitosamente.")
+            reporte.write(f"✅ Usuario {username} agregado exitosamente.\n")
+            reporte.write("Mensaje de confirmación:\n" + texto_mensaje + "\n")
+            reporte.write("------------------------------------------------\n")
+
+
+        else:
+            print(f"❌ Error al agregar usuario {username}.")
+            reporte.write(f"❌ Error al agregar usuario {username}.\n")
+            reporte.write("Mensaje de error:\n" + texto_mensaje + "\n")
+            reporte.write("------------------------------------------------\n")
+
+    except Exception as e:
+        print(f"❌ Ocurrió un error: {str(e)}")
+        reporte.write(f"❌ Ocurrió un error al intentar agregar usuario {username}.\n")
+        reporte.write("Error:\n" + str(e) + "\n")
+        reporte.write("------------------------------------------------\n")
+    
+    time.sleep(2)
+
+
+reporte.write("=== FIN DEL REPORTE ===\n")
+reporte.close()
+driver.quit() 
+    
 print("✅ Prueba de Agregar Usuarios terminada")

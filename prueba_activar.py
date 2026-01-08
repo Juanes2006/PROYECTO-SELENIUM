@@ -10,8 +10,8 @@ import time
 
 # ---------------  Inicializar reporte de desactivacion   --------------------- 
 
-reporte = open("reporte_desactivacion.txt", "w", encoding="utf-8")
-reporte.write("=== REPORTE DE DESACTIVACION DE USUARIOS === \n\n")
+reporte = open("reporte_activacion.txt", "w", encoding="utf-8")
+reporte.write("=== REPORTE DE ACTIVACION DE USUARIOS === \n\n")
 
 
 # ---------- 1. ABRIR NAVEGADOR ----------
@@ -66,7 +66,11 @@ for fila in range(2, sheet.max_row + 1):
 
         estado_antes = boton.text
         print("Estado antes:", estado_antes)
-        if estado_antes != " Activar ":
+        estado_antes = boton.text.strip()
+
+
+        
+        if estado_antes != " Desactivar ":
             boton.click()
 
     # 2️⃣ Esperar que el DOM se actualice
@@ -89,7 +93,7 @@ for fila in range(2, sheet.max_row + 1):
             WebDriverWait(driver, 10).until(
                 EC.text_to_be_present_in_element(
                 (By.XPATH, "//tr[td[contains(text(), '{valor}')]]//button".format(valor=valor_busqueda)),
-                "Activar"
+                "Desactivar"
             )
             )
 
@@ -104,25 +108,25 @@ for fila in range(2, sheet.max_row + 1):
             print("📢 Mensaje:", texto_mensaje)
 
             if "Estado del usuario cambiado correctamente." in driver.page_source:
-                print(f"✅ Usuario {valor_busqueda} desactivado exitosamente.")
-                reporte.write(f"✅ Usuario {valor_busqueda} desactivado exitosamente.\n")
+                print(f"✅ Usuario {valor_busqueda} activado exitosamente.")
+                reporte.write(f"✅ Usuario {valor_busqueda} activado exitosamente.\n")
                 reporte.write("Mensaje de confirmación:\n" + texto_mensaje + "\n")
                 reporte.write("------------------------------------------------\n")
             
            
             else:
-                print(f"❌ Error al desactivar usuario {valor_busqueda}.")
-                reporte.write(f"❌ Error al desactivar usuario {valor_busqueda}.\n")
+                print(f"❌ Error al activar usuario {valor_busqueda}.")
+                reporte.write(f"❌ Error al activar usuario {valor_busqueda}.\n")
                 reporte.write("Mensaje de error:\n" + texto_mensaje + "\n")
                 reporte.write("------------------------------------------------\n")
 
         else:
-            print(f"❌ Usuario {valor_busqueda} ya está desactivado.")
-            reporte.write(f"❌ Usuario {valor_busqueda} ya está desactivado.\n")
+            print(f"Usuario {valor_busqueda} ya estaba activo, no se requiere acción.")
+            reporte.write(f"❌ Usuario {valor_busqueda} ya está activado.\n")
             reporte.write("------------------------------------------------\n")
 
     except Exception as e:
-        print("❌ Error durante la búsqueda o desactivación:", str(e))
+        print("❌ Error durante la búsqueda o activación:", str(e))
         reporte.write(f"❌ Error con {valor_busqueda}: {str(e)}\n")
         continue
 
