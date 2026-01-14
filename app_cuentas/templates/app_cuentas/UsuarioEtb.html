@@ -1,0 +1,492 @@
+{% extends 'app_cuentas/base.html' %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block content %}
+<style>
+    .nav {
+        height: 60px;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid #e5e7eb;
+    }
+</style>
+
+<div class="nav">
+    <h1>Usuarios</h1>
+    <div >
+        
+        <button type="button"
+                class="btn_agregar"
+                data-bs-toggle="modal"
+                data-bs-target="#agregarUsuarioModalActualizado">
+            Agregar Usuario Actualizado
+        </button>
+    </div>
+</div>
+
+
+</div><br><br>
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #e5e7eb;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn_habilitar button {
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+
+
+    }
+
+    .btn_eliminar button {
+        background-color: #f44336;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+
+
+    }
+
+    .ver_btn {
+        background-color: #2563eb;
+        color: white;
+        border-radius: 30px;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .inp_buscar {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        flex: 1;
+        max-width: 300px;
+    }
+
+    .btn_buscar {
+        padding: 8px 16px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+.agregar_usu {
+        background-color: #10b981;
+        color: white;
+        border-radius: 30px;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+    form {
+    display: flex;
+        align-items: center;
+    gap: 10px;
+}
+
+
+</style>
+
+<!-- Secccion de buscar -->
+<form  method="get" action="{% url 'buscar_usuario_etb' %}">
+    <input class="inp_buscar" type="text" name="buscador_Usuario" placeholder="Buscar usuario..." value="{{ request.GET.buscador_Usuario }}">
+    <button class="btn_buscar" type="submit">Buscar</button>
+ 
+</form>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Login</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for u in usuarios %}
+        <tr>
+            <td>{{ u.login }}</td>
+
+            <td>{{ u.nombres }} {{ u.apellidos }}</td>
+
+            <td>
+                {% if u.estado|lower == "activo" %}
+                    <span class="text-success">Activo</span>
+                {% else %}
+                    <span class="text-danger">Inactivo</span>
+                {% endif %}
+            </td>
+
+            <td>
+                <a class="btn btn-info btn-sm" href="{% url 'ver_usuario_etb' u.id %}">
+                    Ver
+                </a>
+
+                <form method="post"
+                      action="{% url 'cambiar_estado_usuario' u.id %}"
+                      style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        {% if u.estado|lower == "activo" %}
+                            Desactivar
+                        {% else %}
+                            Activar
+                        {% endif %}
+                    </button>
+                </form>
+
+                <form method="post"
+                      action="{% url 'eliminar_usuario_etb' u.id %}"
+                      style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<!-- The Modal of see users -->
+
+<div id="userModal" style="display:none; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.4);">
+    <div style="background-color:#fefefe; margin:15% auto; padding:20px; border:1px solid #888; width:80%; max-width:600px;">
+        <span id="closeModal" style="color:red; float:right; font-size:28px; font-weight:bold;">&times;</span>
+        <h2>Detalle del Usuario</h2>
+        <table cellpadding="8">
+            <tr>
+                <th align="left">Usuario:</th>
+                <td>{{ usuario.username }}</td>
+            </tr>
+            <tr>
+                <th align="left">Email:</th>
+                <td>{{ usuario.email|default:"Sin email" }}</td>
+            </tr>
+            <tr>
+                <th align="left">Estado:</th>
+                <td>
+                    {% if usuario.is_active %}
+                        <span style="color:green;">Activo</span>
+                    {% else %}
+                        <span style="color:red;">Inactivo</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th align="left">Es staff:</th>
+                <td>{{ usuario.is_staff|yesno:"Sí,No" }}</td>
+            </tr>
+            <tr>
+                <th align="left">Fecha registro:</th>
+                <td>{{ usuario.date_joined }}</td>
+            </tr>
+            <tr>
+                <th align="left">Último login:</th>
+                <td>{{ usuario.last_login|default:"Nunca" }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal agregar Actualizado-->
+<div class="modal fade" id="agregarUsuarioModalActualizado" tabindex="-1" role="dialog" aria-labelledby="agregarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarUsuarioModalLabel">Agregar Usuarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'agregar_usuario_actualizado' %}">
+                    {% csrf_token %}
+            
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="clasificacion" class="form-label">Clasificación</label>
+                            <input type="text" class="form-control" id="clasificacion" name="clasificacion" required>
+                        </div>
+                
+                        <div class="col-md-4 mb-3">
+                            <label for="login" class="form-label">Login</label>
+                            <input type="text" class="form-control" id="login" name="login" required>
+                        </div>
+                        
+                        <div class="col-md-4 mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select class="col-md-4 mb-3 form-select" name="estado" required>
+                                <option value="ACTIVO">Activo</option>
+                                <option value="INACTIVO">Inactivo</option>
+                            </select>
+                        </div>
+                
+                        
+                    
+                    <!-------------------------------------------------------------------------------------------------->
+                    <div class="col-md-4 mb-3">
+                        <label for="identificacion_usuario" class="form-label">Identificacion Usuario</label>
+                        <input type="number" class="form-control" id="identificacion_usuario" name="identificacion_usuario" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="fecha_ingreso" class="form-label">Fecha Ingreso</label>
+                        <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="fecha_retiro" class="form-label">Fecha Retiro</label>
+                        <input type="date" class="form-control" id="fecha_retiro" name="fecha_retiro" required>
+                    </div>
+            
+                    
+                    <!-------------------------------------------------------------------------------------------------->
+
+                    <div class="col-md-4 mb-3">
+                        <label for="vicepresidente" class="form-label">Vicepresidencia</label>
+                        <input type="text" class="form-control" id="vicepresidente" name="vicepresidente" required>
+                    </div>
+
+                     <div class="col-md-4 mb-3">
+                        <label for="gerencia" class="form-label">Gerencia</label>
+                        <input type="text" class="form-control" id="gerencia" name="gerencia" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="direccion" class="form-label">Direccion</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                    </div>
+                    
+                    <!-------------------------------------------------------------------------------------------------->
+
+                    <div class="col-md-4 mb-3">
+                        <label for="canal" class="form-label">Canal</label>
+                        <input type="text" class="form-control" id="canal" name="canal" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="proveedor" class="form-label">Proveedor</label>
+                        <input type="text" class="form-control" id="proveedor" name="proveedor" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="nro_contrato" class="form-label">Nro Contrato</label>
+                        <input type="text" class="form-control" id="nro_contrato" name="nro_contrato" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+                    <div class="col-md-4 mb-3">
+                        <label for="subcanal" class="form-label">Sub Canal</label>
+                        <input type="text" class="form-control" id="subcanal" name="subcanal" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="punto" class="form-label">Punto</label>
+                        <input type="text" class="form-control" id="punto" name="punto" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cc_supervisor" class="form-label">Cedula Supervisor</label>
+                        <input type="text" class="form-control" id="cc_supervisor" name="cc_supervisor" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+            
+
+                    <div class="col-md-4 mb-3">
+                        <label for="lider_etb" class="form-label">Lider Etb</label>
+                        <input type="text" class="form-control" id="lider_etb" name="lider_etb" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="departamento" class="form-label">Departamento</label>
+                        <select class="col-md-4 mb-3 form-select" name="departamento" required>
+                            <option value="CALDAS">Caldas</option>
+                            <option value="ANTIOQUIA">Antioquia</option>
+                        </select>
+                        
+                    </div>
+
+                    
+                
+                    <div class="col-md-4 mb-3">
+                        <label for="ciudad" class="form-label">Ciudad</label>
+                        <input type="text" class="form-control" id="ciudad" name="ciudad" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+            
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="nombres" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="nombres" name="nombres" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="apellidos" class="form-label">Apellidos</label>
+                        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="correo" class="form-label">Correo</label>
+                        <input type="text" class="form-control" id="correo" name="correo" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+                      
+                    <div class="col-md-4 mb-3">
+                        <label for="celular" class="form-label">Celular</label>
+                        <input type="text" class="form-control" id="celular" name="celular" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="eps" class="form-label">Eps</label>
+                        <input type="text" class="form-control" id="eps" name="eps" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="fecha_nacimiento" class="form-label">Fecha De Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+
+                    <div class="col-md-4 mb-3">
+                        <label for="sexo" class="form-label">Sexo</label>
+                        <input type="text" class="form-control" id="sexo" name="sexo" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="cargo" class="form-label">Cargo</label>
+                    <select class="mb-3 form-select" name="cargo" readonly>
+                        <option value="ASESOR">Asesor</option>
+                    </select>
+                </div>
+                    
+                    <div class="col-md-4 mb-3">
+                        <label for="perfil_portal_suma" class="form-label">Perfil Portal Suma</label>
+                        <input type="text" class="form-control" id="perfil_portal_suma" name="perfil_portal_suma" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+
+                    <div class="col-md-4 mb-3">
+                        <label for="restriccion" class="form-label">Restricción</label>
+                        <input type="text" class="form-control" id="restriccion" name="restriccion" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="causa_restriccion" class="form-label">Causa Restricción</label>
+                        <input type="text" class="form-control" id="causa_restriccion" name="causa_restriccion" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_fibra" class="form-label">Id Fibra</label>
+                        <input type="text" class="form-control" id="id_fibra" name="id_fibra" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="fija" class="form-label">Fija</label>
+                        <input type="number" class="form-control" id="fija" name="fija" required>
+                    </div>
+            
+                    <div class="col-md-4 mb-3">
+                        <label for="movil" class="form-label">Móvil</label>
+                        <input type="number" class="form-control" id="movil" name="movil" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_cobre" class="form-label">Id Cobre</label>
+                        <input type="number" class="form-control" id="id_cobre" name="id_cobre" required>
+                    </div>
+
+                    <!-------------------------------------------------------------------------------------------------->
+                
+                  
+            
+            
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Agregar Usuario
+                        </button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<!-- Estilos -->
+<style>
+    .btn_agregar {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn_cancelar {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .username, .email, .password {
+        margin-bottom: 15px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        padding: 8px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+
+
+{% endblock %}

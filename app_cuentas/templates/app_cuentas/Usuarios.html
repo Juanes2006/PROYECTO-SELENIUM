@@ -6,18 +6,29 @@
 <style>
     .nav {
         height: 60px;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            border-bottom: 1px solid #e5e7eb;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid #e5e7eb;
     }
 </style>
 
 <div class="nav">
-<h1>Usuarios</h1>
-<a class="agregar_usu" href="{% url 'agregar_usuario' %}">Agregar usuarios</a>
+    <h1>Usuarios</h1>
+    <div >
+        <button type="button"
+                class="btn_agregar"
+                data-bs-toggle="modal"
+                data-bs-target="#agregarUsuarioModal">
+            Agregar Usuario
+        </button>
+      
+    </div>
+</div>
+
+
 </div><br><br>
 
 <style>
@@ -71,9 +82,10 @@
 
     .inp_buscar {
         padding: 8px;
-        width: 200px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        flex: 1;
+        max-width: 300px;
     }
 
     .btn_buscar {
@@ -91,6 +103,12 @@
         padding: 10px 20px;
         text-decoration: none;
     }
+    form {
+    display: flex;
+        align-items: center;
+    gap: 10px;
+}
+
 
 </style>
 
@@ -98,6 +116,7 @@
 <form  method="get" action="{% url 'buscar_usuario' %}">
     <input class="inp_buscar" type="text" name="buscador_Users" placeholder="Buscar usuario..." value="{{ request.GET.buscador_Users }}">
     <button class="btn_buscar" type="submit">Buscar</button>
+ 
 </form>
 
 <table border="1" cellpadding="8">
@@ -123,7 +142,9 @@
             </td>
 
             <td>
+                
                 <a class="ver_btn" href="{% url 'ver_usuario' u.id %}">Ver</a>
+
 
                 <form class="btn_habilitar" method="post"
                       action="{% url 'cambiar_estado_usuario' u.id %}"
@@ -151,5 +172,120 @@
         {% endfor %}
     </tbody>
 </table>
+
+
+<!-- The Modal of see users -->
+
+<div id="userModal" style="display:none; position:fixed; z-index:1; left:0; top:0; width:100%; height:100%; overflow:auto; background-color:rgba(0,0,0,0.4);">
+    <div style="background-color:#fefefe; margin:15% auto; padding:20px; border:1px solid #888; width:80%; max-width:600px;">
+        <span id="closeModal" style="color:red; float:right; font-size:28px; font-weight:bold;">&times;</span>
+        <h2>Detalle del Usuario</h2>
+        <table cellpadding="8">
+            <tr>
+                <th align="left">Usuario:</th>
+                <td>{{ usuario.username }}</td>
+            </tr>
+            <tr>
+                <th align="left">Email:</th>
+                <td>{{ usuario.email|default:"Sin email" }}</td>
+            </tr>
+            <tr>
+                <th align="left">Estado:</th>
+                <td>
+                    {% if usuario.is_active %}
+                        <span style="color:green;">Activo</span>
+                    {% else %}
+                        <span style="color:red;">Inactivo</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th align="left">Es staff:</th>
+                <td>{{ usuario.is_staff|yesno:"Sí,No" }}</td>
+            </tr>
+            <tr>
+                <th align="left">Fecha registro:</th>
+                <td>{{ usuario.date_joined }}</td>
+            </tr>
+            <tr>
+                <th align="left">Último login:</th>
+                <td>{{ usuario.last_login|default:"Nunca" }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+<!-- SECTION OF TTHE MODAL ADD USERS-->
+
+<!-- Modal -->
+<div class="modal fade" id="agregarUsuarioModal" tabindex="-1" role="dialog" aria-labelledby="agregarUsuarioModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarUsuarioModalLabel">Agregar Usuarios</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'agregar_usuario' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button class="btn_agregar" style="width: 200px; margin-left: 10px; " type="submit">Agregar Usuario</button>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Estilos -->
+<style>
+    .btn_agregar {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .btn_cancelar {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .username, .email, .password {
+        margin-bottom: 15px;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        padding: 8px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+
 
 {% endblock %}
