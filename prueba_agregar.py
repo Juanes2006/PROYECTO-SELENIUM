@@ -31,7 +31,8 @@ login_password.send_keys(Keys.ENTER)
 
 
 # -----------------2. Abrir URL correcta -------------------------
-driver.get("http://localhost:8000/agregar_usuario")
+driver.get("http://localhost:8000/usuarios")
+
 
 # ---------- 3. CARGAR EXCEL ----------
 workbook = load_workbook("usuarios.xlsx")
@@ -44,6 +45,7 @@ for fila in range(2, sheet.max_row + 1):
     email = sheet.cell(row=fila, column=2).value
     password = sheet.cell(row=fila, column=3).value
 
+
     if not username or not email or not password:
         continue
 
@@ -52,29 +54,40 @@ for fila in range(2, sheet.max_row + 1):
     
     driver.get("http://localhost:8000/agregar_usuario")
 
+    btn = WebDriverWait(driver, 10).until(
+    EC.element_to_be_clickable((By.CLASS_NAME, "btn_agregar"))
+)
+    btn.click()
+
 
     # ---------- 5. BUSCAR ----------
     
 
-    input_username = WebDriverWait(driver, 10).until(
-    EC.presence_of_element_located((By.NAME, "username"))
-)
-
-
-    input_email = driver.find_element(By.NAME, "email")
-    input_password = driver.find_element(By.NAME, "password")
-
-    input_username.clear()
-    input_username.send_keys(username)
-
-    input_email.clear()
-    input_email.send_keys(email)
-
-    input_password.clear()
-    input_password.send_keys(password)
-
+   
 
     try:
+
+        input_username = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.NAME, "username"))
+        )
+
+        input_email = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.NAME, "email"))
+        )
+
+        input_password = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.NAME, "password"))
+        )
+
+        input_username.clear()
+        input_username.send_keys(username)
+
+        input_email.clear()
+        input_email.send_keys(email)
+
+        input_password.clear()
+        input_password.send_keys(password)
+
         input_password.send_keys(Keys.ENTER)
 
 

@@ -1,8 +1,37 @@
 === REPORTE ELIMINACION DE USUARIOS ===
 
-✅ Usuario 1056123119 ELIMINADO exitosamente.
-Mensaje de confirmación:
-Usuario eliminado correctamente.
+❌ Ocurrió un error al intentar eliminar usuario 1056123119.
+Error:
+Message: stale element reference: stale element not found
+  (Session info: chrome=143.0.7499.193); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#staleelementreferenceexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff6f38488d5
+	0x7ff6f3848930
+	0x7ff6f362165d
+	0x7ff6f3637ed3
+	0x7ff6f36369d3
+	0x7ff6f362a006
+	0x7ff6f3627f4c
+	0x7ff6f362c3b4
+	0x7ff6f362c47f
+	0x7ff6f367390c
+	0x7ff6f36a1fda
+	0x7ff6f366c746
+	0x7ff6f36cac97
+	0x7ff6f366ac29
+	0x7ff6f366ba93
+	0x7ff6f3b60620
+	0x7ff6f3b5af60
+	0x7ff6f3b796c6
+	0x7ff6f3865dd4
+	0x7ff6f386ed7c
+	0x7ff6f3851ff4
+	0x7ff6f38521a5
+	0x7ff6f3837ed2
+	0x7ffb6dae7374
+	0x7ffb6efdcc91
+
 ------------------------------------------------
 ✅ Usuario 1056123120 ELIMINADO exitosamente.
 Mensaje de confirmación:

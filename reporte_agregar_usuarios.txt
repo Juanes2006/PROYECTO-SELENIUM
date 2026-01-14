@@ -1,51 +1,42 @@
 === REPORTE AUTOMATIZACIÓN SELENIUM ===
 
-❌ Error al agregar usuario 1056123119.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123120.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123121.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123122.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123123.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123124.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123125.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123126.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123127.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123128.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-❌ Error al agregar usuario 1056123129.
-Mensaje de error:
-El nombre de usuario ya existe.
-------------------------------------------------
-✅ Usuario 1056123130 agregado exitosamente.
+✅ Usuario 1056123119 agregado exitosamente.
 Mensaje de confirmación:
 Usuario agregado exitosamente.
 ------------------------------------------------
-=== FIN DEL REPORTE ===
+✅ Usuario 1056123120 agregado exitosamente.
+Mensaje de confirmación:
+Usuario agregado exitosamente.
+------------------------------------------------
+✅ Usuario 1056123121 agregado exitosamente.
+Mensaje de confirmación:
+Usuario agregado exitosamente.
+------------------------------------------------
+❌ Ocurrió un error al intentar agregar usuario 1056123122.
+Error:
+Message: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=143.0.7499.193); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidsessionidexception
+Stacktrace:
+Symbols not available. Dumping unresolved backtrace:
+	0x7ff78bd188d5
+	0x7ff78bd18930
+	0x7ff78baf165d
+	0x7ff78badd202
+	0x7ff78bb027af
+	0x7ff78bb79a29
+	0x7ff78bb9a5c2
+	0x7ff78bb3ac29
+	0x7ff78bb3ba93
+	0x7ff78c030620
+	0x7ff78c02af60
+	0x7ff78c0496c6
+	0x7ff78bd35dd4
+	0x7ff78bd3ed7c
+	0x7ff78bd21ff4
+	0x7ff78bd221a5
+	0x7ff78bd07ed2
+	0x7ffb6dae7374
+	0x7ffb6efdcc91
+
+------------------------------------------------
